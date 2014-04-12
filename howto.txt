@@ -1,0 +1,43 @@
+http://realdjango.herokuapp.com/
+http://www.jeffknupp.com/blog/2013/12/18/starting-a-django-16-project-the-right-way/
+https://docs.djangoproject.com/en/dev/topics/install/
+http://www.lfd.uci.edu/~gohlke/pythonlibs/#mysql-python
+
+Setting up django development on your machine
+----------------------------------------------
+Install Python version 3 or higher.
+	- https://www.python.org/download/releases/
+	- In my example, mine is installed at C:\Python33.
+
+Add Python directories to your PATH environemnt variable.
+	- C:\Python33;C:\Python33\Scripts;C:\Python33\DLLs
+	- If yours isn't in Python33 this will be different (which is likely).
+	- The following powershell will accomplish this:
+	- [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Python33\;C:\Python33\Scripts\;C:\PYTHON33\DLLs\;C:\PYTHON33\LIB\;", "Machine")
+
+Install easy_install and pip.
+	- These are python package managers and they will make your life much easier.
+	- easy_install:
+		- If you are on Windows 8+, use this powershell and it will install the latest:
+			- (Invoke-WebRequest https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py).Content | python -
+		- If you're not, download this python script and run it:
+			- https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+
+	- pip:
+		- Run "easy_install pip" in a console.
+		- If that doesn't work it's either because easy_install wasn't setup correctly or the Python\Scripts folder is not in your PATH.
+
+Install Django.
+	- pip install django
+	- FIXME: mysql-python is only for 2.x python, what do I use?
+		- I'd like to use PyMySQL: https://github.com/PyMySQL/PyMySQL/
+		- http://stackoverflow.com/questions/2636536/how-to-make-django-work-with-unsupported-mysql-drivers-such-as-gevent-mysql-or-c
+	- pip install mysql-python
+
+Install Mysql server.
+	- http://dev.mysql.com/downloads/mysql/
+	- The MSI installer is probably easier.
+
+Setup a new Mysql database and user.
+	- foo
+	- bar
