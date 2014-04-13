@@ -1,0 +1,11 @@
+vagrant_howto.txt
+----------------------
+Install the latest version of virtualbox:
+	- https://www.virtualbox.org/wiki/Downloads
+
+Install the latest version of vagrant:
+	- http://www.vagrantup.com/downloads.html
+
+Install the latest version of chef:
+	- http://www.opscode.com/chef/install.msi
+
