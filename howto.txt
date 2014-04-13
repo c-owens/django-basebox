@@ -30,9 +30,14 @@ Install easy_install and pip.
 Install Django.
 	- pip install django
 	- FIXME: mysql-python is only for 2.x python, what do I use?
+		- https://github.com/davispuh/MySQL-for-Python-3
 		- I'd like to use PyMySQL: https://github.com/PyMySQL/PyMySQL/
 		- http://stackoverflow.com/questions/2636536/how-to-make-django-work-with-unsupported-mysql-drivers-such-as-gevent-mysql-or-c
 	- pip install mysql-python
+	- 
+
+git clone https://github.com/davispuh/MySQL-for-Python-3.git
+http://www.grayshirt.com/2013/06/26/install-64-bit-mysqldb-for-python-3-on-windows-7/
 
 Install Mysql server.
 	- http://dev.mysql.com/downloads/mysql/
