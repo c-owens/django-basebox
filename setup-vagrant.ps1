@@ -121,6 +121,7 @@ try
 			New-Item -ItemType Directory -Path $devKitPath | Out-Null
 		}
 
+		Push-Location $devkitPath
 		Copy-Item $devkitInstaller $devkitPath -Force
 		$devkitInstaller = Join-Path $devkitPath $devkitFile
 		Invoke-Expression "& '$devkitInstaller' -o -y"
@@ -129,9 +130,26 @@ try
 		Invoke-Expression "& $rubyExe `"$dkrb`" init"
 		Start-Sleep 5
 		Invoke-Expression "& $rubyExe `"$dkrb`" install"
+		Pop-Location
 	}
 
 	verify-installed -url $urlRubyDevkit -checkInstalled $testDevkit -runInstall $installDevkit
+
+	if( !(Test-Path "berkshelf/fixme") )
+	{
+		$gem = Join-Path $rubyPath "bin\gem"
+		Invoke-Expression "& '$gem' install berkshelf"
+	}
+
+	if( !(Test-Path "vagrantbs/fixme") )
+	{
+		Invoke-Expression "& '$vagrantPath' plugin install vagrant-berkshelf"
+	}
+
+	if( !(Test-Path "vagranthm/fixme") )
+	{
+		Invoke-Expression "& '$vagrantPath' plugin install vagrant-hostmanager"
+	}
 
 	# git clone https://github.com/c-owens/Vagrant-LAMP-Stack.git ./
 }
