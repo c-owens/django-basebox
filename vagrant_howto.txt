@@ -6,8 +6,6 @@ Install the latest version of virtualbox:
 Install vagrant 1.4.3:
 	- http://www.vagrantup.com/download-archive/v1.4.3.html
 	- 1.4.3 is used instead of the latest 1.5x because a dependency, vagrant-berkshelf, is not available for 1.5.
-	- http://www.vagrantup.com/downloads.html
-	- vagrant plugin install vagrant-berkshelf --plugin-version 2.0.0.rc2
 
 Install ruby for windows 1.9.3 and the devkit:
 	- http://rubyinstaller.org/downloads/
