@@ -6,7 +6,7 @@
 #
 
 $here = Split-Path $MyInvocation.MyCommand.Path
-$installDir = Join-Path $here "installs"
+$installDir = Join-Path $here "install"
 
 function verify-installed( [string] $url, [scriptblock] $checkInstalled, [scriptblock] $runInstall, [bool] $git = $false )
 {
@@ -135,23 +135,16 @@ try
 
 	verify-installed -url $urlRubyDevkit -checkInstalled $testDevkit -runInstall $installDevkit
 
-	if( !(Test-Path "berkshelf/fixme") )
+	if( !(Test-Path (Join-Path $rubyPath "bin\berks.bat")) )
 	{
 		$gem = Join-Path $rubyPath "bin\gem"
 		Invoke-Expression "& '$gem' install berkshelf"
 	}
 
-	if( !(Test-Path "vagrantbs/fixme") )
-	{
-		Invoke-Expression "& '$vagrantPath' plugin install vagrant-berkshelf"
-	}
+	Invoke-Expression "& '$vagrantPath' plugin install vagrant-berkshelf"
+	Invoke-Expression "& '$vagrantPath' plugin install vagrant-hostmanager"
 
-	if( !(Test-Path "vagranthm/fixme") )
-	{
-		Invoke-Expression "& '$vagrantPath' plugin install vagrant-hostmanager"
-	}
-
-	# git clone https://github.com/c-owens/Vagrant-LAMP-Stack.git ./
+	git clone https://github.com/c-owens/Vagrant-LAMP-Stack.git ./devimage
 }
 finally
 {

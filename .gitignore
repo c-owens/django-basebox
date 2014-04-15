@@ -8,6 +8,10 @@
 #python specific
 *.pyc
 
-#tree specific
-/installs
+## tree specific
+/install
 /config.yml
+.vagrant
+Berksfile.lock
+/cookbooks
+*.sublime-workspace
