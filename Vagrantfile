@@ -1,16 +1,19 @@
-# encoding: utf-8
-# This file originally created at http://rove.io/92fc405d56cf333b980fdf9c4f75c4c8
-
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
 
+  project_name = "django"
+
   config.vm.box = "opscode-ubuntu-12.04_chef-11.4.0"
   config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-11.4.0.box"
   config.ssh.forward_agent = true
 
-  config.vm.network :forwarded_port, guest: 3000, host: 3000
+  config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 3306, host: 3306
+  config.vm.network "private_network", ip: "192.168.33.10"
+
+  config.vm.synced_folder "./www", "/var/www"
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks"]
@@ -33,7 +36,7 @@ Vagrant.configure("2") do |config|
         :listen_ports         => [
           "80"
         ],
-        :contact              => "ops@example.com",
+        :contact              => "dick@butt.com",
         :timeout              => "300",
         :keepalive            => "On",
         :keepaliverequests    => "100",
@@ -56,6 +59,5 @@ Vagrant.configure("2") do |config|
         :grants_path            => "/etc/mysql/grants.sql"
       }
     }
-    config.vm.synced_folder "./www", "/var/www"
   end
 end
