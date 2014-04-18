@@ -1,9 +1,0 @@
-[submodule "chef/cookbooks/apt"]
-	path = chef/cookbooks/apt
-	url = https://github.com/opscode-cookbooks/apt.git
-[submodule "chef/cookbooks/apache2"]
-	path = chef/cookbooks/apache2
-	url = https://github.com/opscode-cookbooks/apache2.git
-[submodule "chef/cookbooks/php"]
-	path = chef/cookbooks/php
-	url = https://github.com/opscode-cookbooks/php.git

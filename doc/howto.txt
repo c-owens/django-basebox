@@ -1,48 +1,16 @@
-http://realdjango.herokuapp.com/
-http://www.jeffknupp.com/blog/2013/12/18/starting-a-django-16-project-the-right-way/
-https://docs.djangoproject.com/en/dev/topics/install/
-http://www.lfd.uci.edu/~gohlke/pythonlibs/#mysql-python
+How to setup environment
+-------------------------
 
-Setting up django development on your machine
-----------------------------------------------
-Install Python version 3 or higher.
-	- https://www.python.org/download/releases/
-	- In my example, mine is installed at C:\Python33.
+Install the latest version of virtualbox:
+    - https://www.virtualbox.org/wiki/Downloads
 
-Add Python directories to your PATH environemnt variable.
-	- C:\Python33;C:\Python33\Scripts;C:\Python33\DLLs
-	- If yours isn't in Python33 this will be different (which is likely).
-	- The following powershell will accomplish this:
-	- [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Python33\;C:\Python33\Scripts\;C:\PYTHON33\DLLs\;C:\PYTHON33\LIB\;", "Machine")
+Install the latest version of vagrant:
+    - http://www.vagrantup.com/downloads.html
 
-Install easy_install and pip.
-	- These are python package managers and they will make your life much easier.
-	- easy_install:
-		- If you are on Windows 8+, use this powershell and it will install the latest:
-			- (Invoke-WebRequest https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py).Content | python -
-		- If you're not, download this python script and run it:
-			- https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+- Make sure vagrant is in the path.
+- cd to the root of the git repository (../ from here).
+- Run "vagrant up" to begin installing a virtual machine.
 
-	- pip:
-		- Run "easy_install pip" in a console.
-		- If that doesn't work it's either because easy_install wasn't setup correctly or the Python\Scripts folder is not in your PATH.
+How to use the virtual machine
+-------------------------------
 
-Install Django.
-	- pip install django
-	- FIXME: mysql-python is only for 2.x python, what do I use?
-		- https://github.com/davispuh/MySQL-for-Python-3
-		- I'd like to use PyMySQL: https://github.com/PyMySQL/PyMySQL/
-		- http://stackoverflow.com/questions/2636536/how-to-make-django-work-with-unsupported-mysql-drivers-such-as-gevent-mysql-or-c
-	- pip install mysql-python
-	- 
-
-git clone https://github.com/davispuh/MySQL-for-Python-3.git
-http://www.grayshirt.com/2013/06/26/install-64-bit-mysqldb-for-python-3-on-windows-7/
-
-Install Mysql server.
-	- http://dev.mysql.com/downloads/mysql/
-	- The MSI installer is probably easier.
-
-Setup a new Mysql database and user.
-	- foo
-	- bar

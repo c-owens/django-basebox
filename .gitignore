@@ -4,6 +4,7 @@
 *.DS_Store
 *.swp
 *.out
+/tmp
 
 #python specific
 *.pyc
@@ -12,6 +13,5 @@
 /install
 /config.yml
 .vagrant
-Berksfile.lock
 /cookbooks
 *.sublime-workspace

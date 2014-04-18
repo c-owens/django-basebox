@@ -1,64 +1,61 @@
+# encoding: utf-8
+# This file originally created at http://rove.io/92fc405d56cf333b980fdf9c4f75c4c8
+
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure("2") do |config|
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
+  config.vm.box = "opscode-ubuntu-12.04_chef-11.4.0"
+  config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-11.4.0.box"
+  config.ssh.forward_agent = true
 
-  project_name = "braveone"
+  config.vm.network :forwarded_port, guest: 3000, host: 3000
 
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "precise32"
-
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.10"
-
-  config.vm.host_name = "www.localhost.vm"
-
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
-
-  config.vm.synced_folder "/www" "/var/www"
-
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
-  #
-  # View the documentation for the provider you're using for more
-  # information on available options.
-
-  # Enable provisioning with chef solo, specifying a cookbooks path, roles
-  # path, and data_bags path (all relative to this Vagrantfile), and adding
-  # some recipes and/or roles.
-  #
-  config.vm.provision "chef_solo" do |chef|
-    chef.cookbooks_path = ["../chef/site-cookbooks", "../chef/cookbooks"]
-    chef.roles_path = "../chef/roles"
-    chef.add_role "webserver"
- end
-
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = ["cookbooks"]
+    chef.add_recipe :apt
+    chef.add_recipe 'apache2'
+    chef.add_recipe 'python'
+    chef.add_recipe 'mysql::server'
+    chef.json = {
+      :apache => {
+        :default_site_enabled => "true",
+        :dir                  => "/etc/apache2",
+        :log_dir              => "/var/log/apache2",
+        :error_log            => "error.log",
+        :user                 => "www-data",
+        :group                => "www-data",
+        :binary               => "/usr/sbin/apache2",
+        :cache_dir            => "/var/cache/apache2",
+        :pid_file             => "/var/run/apache2.pid",
+        :lib_dir              => "/usr/lib/apache2",
+        :listen_ports         => [
+          "80"
+        ],
+        :contact              => "ops@example.com",
+        :timeout              => "300",
+        :keepalive            => "On",
+        :keepaliverequests    => "100",
+        :keepalivetimeout     => "5"
+      },
+      :mysql  => {
+        :server_root_password   => "password",
+        :server_repl_password   => "password",
+        :server_debian_password => "password",
+        :service_name           => "mysql",
+        :basedir                => "/usr",
+        :data_dir               => "/var/lib/mysql",
+        :root_group             => "root",
+        :mysqladmin_bin         => "/usr/bin/mysqladmin",
+        :mysql_bin              => "/usr/bin/mysql",
+        :conf_dir               => "/etc/mysql",
+        :confd_dir              => "/etc/mysql/conf.d",
+        :socket                 => "/var/run/mysqld/mysqld.sock",
+        :pid_file               => "/var/run/mysqld/mysqld.pid",
+        :grants_path            => "/etc/mysql/grants.sql"
+      }
+    }
+    config.vm.synced_folder "./www", "/var/www"
+  end
 end
