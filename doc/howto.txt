@@ -12,10 +12,6 @@ Install the latest version of virtualbox:
 Install the latest version of vagrant:
     - http://www.vagrantup.com/downloads.html
 
-?? Maybe install vagrant-librarian-chef plugin ??
-	- vagrant plugin install vagrant-librarian-chef
-	- https://github.com/jimmycuadra/vagrant-librarian-chef
-
 - Make sure vagrant is in the path.
 - cd to the root of the git repository (../ from here).
 - Run "vagrant up" to begin installing a virtual machine.
@@ -32,4 +28,4 @@ How to use the virtual machine
 	-	apache2
 	-	python
 	-	mysql
-
+	-	django
