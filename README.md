@@ -1,23 +1,30 @@
-A django development box provisioned with vagrant and chef.
+#### A django development box provisioned with vagrant and chef.
 
 Prereqs
 -------------------------
--   Virtualbox
--   Vagrant
+* Virtualbox
+* Vagrant
 
 Installation (Windows)
 -------------------------
 
-Install either cygwin or OpenSSH for Windows:
-    - Cygwin (bash shell for windows): http://www.cygwin.com/install.html
-    - OpenSSH for Windows: http://sshwindows.sourceforge.net/
-    - If using OpenSSH for Windows, make sure "ssh" is in your path.
+#### Install either cygwin or OpenSSH for Windows:
 
-Install the latest version of virtualbox:
-    - https://www.virtualbox.org/wiki/Downloads
+Cygwin (bash shell for windows):
 
-Install the latest version of vagrant:
-    - http://www.vagrantup.com/downloads.html
+    http://www.cygwin.com/install.html
+
+OpenSSH for Windows:
+ 
+    http://sshwindows.sourceforge.net/
+
+If using OpenSSH for Windows, make sure "ssh" is in your path.
+
+#### Install the latest version of virtualbox:
+    https://www.virtualbox.org/wiki/Downloads
+
+#### Install the latest version of vagrant:
+    http://www.vagrantup.com/downloads.html
 
 - Make sure vagrant is in the path.
 - cd to the root of the git repository (../ from here).
