@@ -10,17 +10,24 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 8000, host: 8000
   config.vm.network :forwarded_port, guest: 3306, host: 3306
   config.vm.network "private_network", ip: "192.168.33.10"
 
+  config.vm.synced_folder "./app", "/home/vagrant/app"
   config.vm.synced_folder "./www", "/var/www"
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks"]
+
     chef.add_recipe :apt
+    chef.add_recipe 'build-essential'
+    #chef.add_recipe 'git'
     chef.add_recipe 'apache2'
+    chef.add_recipe "apache2::mod_wsgi"
     chef.add_recipe 'python'
     chef.add_recipe 'mysql::server'
+
     chef.json = {
       :apache => {
         :default_site_enabled => "true",
@@ -59,5 +66,8 @@ Vagrant.configure("2") do |config|
         :grants_path            => "/etc/mysql/grants.sql"
       }
     }
+
+      # Application provision
+      config.vm.provision :shell, :inline => "pip install -r ./app/requirements.txt"
   end
 end
