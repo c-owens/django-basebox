@@ -41,7 +41,7 @@ How to use the virtual machine
 * "vagrant destroy" will shutdown and remove the virtual machine.
 
 #### The template has the following pre-installed:
-    -   apache2
-    -   python
-    -   mysql
-    -   django
+* apache2
+* python
+* mysql
+* django
